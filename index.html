@@ -6,12 +6,16 @@
     <title>Lego Minifigure How-To</title>
     <style>
         body { font-family: Arial, sans-serif; margin:0; }
-        header { position: fixed; top:0; left:0; width:100%; background:#ff0000; color:#fff; padding:10px; box-sizing:border-box; }
-        .hamburger { cursor:pointer; font-size:24px; }
-        nav { display:none; background:#444; position:absolute; top:40px; left:0; width:200px; }
+        header { position: fixed; top:0; left:0; width:100%; background:#ff0000; color:#fff; padding:10px; box-sizing:border-box; z-index:1000; }
+        #logo { height:40px; vertical-align: middle; display:inline-block; margin-right:10px; }
+        .hamburger { cursor:pointer; font-size:24px; padding:5px 10px; display:inline-block; }
+        nav { display:none; background:#ff0000; position:fixed; top:60px; left:0; width:200px; z-index:999; }
         nav a { display:block; color:#fff; text-decoration:none; padding:10px; }
-        nav a:hover { background:#555; }
-        main { padding:60px 20px 20px; }
+        nav a:hover { background:#ad0000ab; }
+        main { padding:60px 20px 20px; position:relative; }
+        .images { position:absolute; right:212px; top:calc(60% + 336px); transform:translateY(-50%); display:flex; flex-direction:column; gap:20px; }
+        .images img { width:400px; height:auto; }
+        .hamburger:hover { background:#ad0000ab; }
     </style>
     <script>
         function toggleMenu(){
@@ -20,14 +24,17 @@
             else nav.style.display = 'block';
         }
         document.addEventListener('click', function(e){
-            if(!e.target.closest('header')){
-                document.getElementById('nav').style.display = 'none';
+            var nav = document.getElementById('nav');
+            var hamburger = document.querySelector('.hamburger');
+            if(!e.target.closest('header') && e.target !== hamburger && !hamburger.contains(e.target)){
+                nav.style.display = 'none';
             }
         });
     </script>
 </head>
 <body>
     <header>
+        <a href="index.html"><img id="logo" src="lego.png" alt="Lego Logo"></a>
         <span class="hamburger" onclick="toggleMenu()">☰</span>
         <nav id="nav">
             <a href="index.html">Home</a>
@@ -39,6 +46,10 @@
         <h1>How to make a lego Minifigure</h1>
         <p>click on the navbar to find the HowTo page,.</p>
         <p>it will show you how to put to put together a custom minifigure.</p>
+        <div class="images">
+            <img src="starwars.jpg" alt="Star Wars Lego">
+            <img src="ninjago.jpeg" alt="Ninjago Lego">
+        </div>
     </main>
 </body>
 </html>
